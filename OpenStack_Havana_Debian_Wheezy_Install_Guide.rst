@@ -9,7 +9,7 @@
 Authors
 ==========
 
-L. Reusser 
+L\. Reusser 
 
 Contributors
 =============
@@ -79,12 +79,14 @@ For a three node setup, you need at least three nodes ;-) For testing purpose, y
    apt-get update && apt-get dist-upgrade -y
 
 * DNS Resolution::
+
    echo 'domain yourdomain.ch
    nameserver 8.8.8.8
    nameserver 8.8.4.4
    ' > /etc/resolv.conf
 
 * Eternal Command History::
+
    echo '
    HISTSIZE=1000000
    HISTFILESIZE=9999999
@@ -93,21 +95,26 @@ For a three node setup, you need at least three nodes ;-) For testing purpose, y
    ' >> /root/.bashrc
 
 * Remove Exim and install Postfix::
+
    apt-get install postfix -y
    dpkg --purge exim4 exim4-base exim4-config exim4-daemon-light
 
 * Activate mail forwarding::
+
    echo "root: youremail@yourdomain.ch" >>/etc/aliases
    newaliases
    /etc/init.d/postfix reload
 
 * Remove unneeded software::
+
    dpkg --purge nfs-common rpcbind
 
 * Install some useful tools::
+
    apt-get install ethtool tcpdump
 
-* Activate VLAN’s:
+* Activate VLAN’s::
+
    apt-get install vlan
    echo "
    # vlan's
@@ -116,7 +123,9 @@ For a three node setup, you need at least three nodes ;-) For testing purpose, y
    modprobe 8021q
 
 * Enable injection
+
    To enable key-file, network & metadata injection into instances images::
+   
    echo "nbd max_part=65" >> /etc/modules
    modprobe nbd max_part=65
 
@@ -129,9 +138,9 @@ For a three node setup, you need at least three nodes ;-) For testing purpose, y
    ntpq -pn
    
    remote                refid      st t when poll reach   delay   offset  jitter
-   \*62.12.173.11    .PPS.            1 u  350 1024  377    4.725   -0.835   0.351
-   +195.141.190.190 212.161.179.138  2 u  418 1024  377    4.451   -0.971   0.696
-   +130.60.204.10   130.60.159.8     3 u  584 1024  377    5.139    6.358   2.058
+   62.12.173.11    .PPS.            1 u  350 1024  377    4.725   -0.835   0.351
+   195.141.190.190 212.161.179.138  2 u  418 1024  377    4.451   -0.971   0.696
+   130.60.204.10   130.60.159.8     3 u  584 1024  377    5.139    6.358   2.058
 
    The reach column should show some non zero values after a minute.
 
@@ -279,6 +288,7 @@ If you want to use your controller node as network node as well, you have to add
    ./keystone_endpoints_basic.sh
 
 * Modify bashrc file so we won't be bothered later::
+
    echo "export OS_TENANT_NAME=admin
    export OS_USERNAME=admin
    export OS_PASSWORD='SuperAdminPass123'
@@ -757,6 +767,7 @@ See chapter 2.1. Preparing Debian
    signing_dir = /var/lib/neutron/keystone-signing
    
 * Edit dhcp_agent.ini::
+
    interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
 
 * Edit /etc/sudoers.d/neutron_sudoers to give it full access like this (This is unfortunatly mandatory) ::
@@ -1086,6 +1097,7 @@ HINT: Replace <id> with the id of your command output:
    cd /etc/init.d/; for i in $( ls neutron-* ); do sudo service $i restart; done; cd -
 
 * Create an external network with the tenant id belonging to the admin tenant (keystone tenant-list to get the appropriate id)::
+
    keystone tenant-list
    export put_id_of_admin_tenant=<id>
    neutron net-create --tenant-id $put_id_of_admin_tenant ext_net --router:external=True
@@ -1157,7 +1169,7 @@ To view a copy of this license, visit [ http://creativecommons.org/licenses/by/3
 7. Contact
 ===========
 
-L. Reusser : reusserl@users.noreply.github.com
+L\. Reusser : reusserl@users.noreply.github.com
 
 8. Credits
 =================
