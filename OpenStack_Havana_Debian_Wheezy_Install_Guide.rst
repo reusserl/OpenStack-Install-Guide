@@ -1182,7 +1182,7 @@ This work has been based on:
 9. To do
 ========
 
-Your suggestions are always welcomed.
+Your suggestions are always welcome.
 
 
 
