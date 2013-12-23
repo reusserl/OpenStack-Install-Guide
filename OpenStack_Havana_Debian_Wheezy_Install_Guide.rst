@@ -2,26 +2,22 @@
   OpenStack Havana on Debian Wheezy Install Guide
 ==========================================================
 
-:Version: 0.02
+:Version: 0.03
 :Source: https://github.com/reusserl/OpenStack-Install-Guide
 :Keywords: OpenStack, Havana, Debian, Wheezy, Multi, Node, Neutron, Nova, Keystone, Glance, Horizon, Cinder, OpenVSwitch, KVM
 
 Authors
 ==========
 
-`L. Reusser`_ 
+L. Reusser 
 
 Contributors
-==========
+=============
 
-=================================================== =======================================================
-
-
-=================================================== =======================================================
 
 
 Table of Contents
-=================
+==================
 
 ::
 
@@ -58,10 +54,10 @@ For a three node setup, you need at least three nodes ;-) For testing purpose, y
 .. image:: OpenStack_Setup_Multi-Node_Multi-Nova_X01.01.jpg
 
 2. Controller Node
-===============
+===================
 
 2.1. Preparing Debian
------------------
+----------------------
 
 * Install a Debian Wheezy (64 Bit) minimal system and su to root::
 
@@ -122,23 +118,25 @@ For a three node setup, you need at least three nodes ;-) For testing purpose, y
 * Enable injection
    To enable key-file, network & metadata injection into instances images::
    echo "nbd max_part=65" >> /etc/modules
-  modprobe nbd max_part=65
+   modprobe nbd max_part=65
 
 * Install ntp service::
+
    apt-get install -y ntp
 
-Check if ntp is working::
-ntpq -pn
-     remote           refid      st t when poll reach   delay   offset  jitter
-==============================================================================
-*62.12.173.11    .PPS.            1 u  350 1024  377    4.725   -0.835   0.351
-+195.141.190.190 212.161.179.138  2 u  418 1024  377    4.451   -0.971   0.696
-+130.60.204.10   130.60.159.8     3 u  584 1024  377    5.139    6.358   2.058
+* Check if ntp is working::
 
-The reach column should show some non zero values after a minute.
+   ntpq -pn
+   
+   remote                refid      st t when poll reach   delay   offset  jitter
+   \*62.12.173.11    .PPS.            1 u  350 1024  377    4.725   -0.835   0.351
+   +195.141.190.190 212.161.179.138  2 u  418 1024  377    4.451   -0.971   0.696
+   +130.60.204.10   130.60.159.8     3 u  584 1024  377    5.139    6.358   2.058
+
+   The reach column should show some non zero values after a minute.
 
 2.2. Networking
-------------
+----------------
 
 * Only one NIC should be reachable from the internet. This is where the customers will access the webinterface horizon. In our case, this is eth1. But it could also be a bond interface (bond0) or a vlan (vla100) or both bond0.100. So edit /etc/network/interfaces accordingly::
 
@@ -163,7 +161,7 @@ If you want to use your controller node as network node as well, you have to add
    nohup sh -c "/etc/init.d/networking stop; sleep 2; /etc/init.d/networking start"
 
 2.3. MySQL & RabbitMQ
-------------
+-----------------------
 
 * Install MySQL::
 
@@ -606,7 +604,7 @@ If you want to use your controller node as network node as well, you have to add
 
    cinder-manage db sync
 
-* Finally, don't forget to create a volumegroup and name it cinder-volumes::
+* Finally, don't forget to create a volumegroup and name it cinder-volumes
 
   TODO: volume groups should be created before this step
 
@@ -635,7 +633,7 @@ If you want to use your controller node as network node as well, you have to add
 ================
 
 3.1. Preparing the Node
-------------------
+------------------------
 
 See chapter 2.1. Preparing Debian
 
@@ -647,7 +645,7 @@ See chapter 2.1. Preparing Debian
    sysctl net.ipv4.ip_forward=1
 
 3.2.Networking
-------------
+---------------
 
 * 3 NICs must be present::
    
@@ -670,7 +668,7 @@ See chapter 2.1. Preparing Debian
    netmask 255.255.255.0
 
 3.4. OpenVSwitch (Part1)
-------------------
+-------------------------
 
 * Install the openVSwitch::
 
@@ -773,7 +771,7 @@ See chapter 2.1. Preparing Debian
    cd /etc/init.d/; for i in $( ls neutron-* ); do sudo service $i restart; done; cd -
 
 3.4. OpenVSwitch (Part2)
-------------------
+-------------------------
 * Edit the eth2 in /etc/network/interfaces to become like this::
 
    # VM internet Access
@@ -806,7 +804,7 @@ See chapter 2.1. Preparing Debian
 =========================
 
 4.1. Preparing the Node
-------------------
+------------------------
 
 See chapter 2.1. Preparing Debian
 
@@ -818,7 +816,7 @@ See chapter 2.1. Preparing Debian
    sysctl net.ipv4.ip_forward=1
 
 4.2.Networking
-------------
+---------------
 
 * Perform the following::
    
@@ -1040,7 +1038,9 @@ HINT: Replace <id> with the id of your command output:
    export put_id_of_user_one=<id>
    
 * Get ID of member role::
+
    keystone role-list
+   
    +----------------------------------+----------------------+
    |                id                |         name         |
    +----------------------------------+----------------------+
@@ -1050,7 +1050,7 @@ HINT: Replace <id> with the id of your command output:
    | 9fe2ff9ee4384b1894a90878d3e92bab |       _member_       |
    | 5e155772a7b446e2bc0dc5c884d8eae2 |        admin         |
    +----------------------------------+----------------------+
-
+   
    We write down id of role „Member“.
    export put_id_of_member_role=594dad7afd8e473db41dfadcfc3c88c1
 
