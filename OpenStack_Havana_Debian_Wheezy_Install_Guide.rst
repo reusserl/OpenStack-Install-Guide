@@ -2,7 +2,7 @@
   OpenStack Havana on Debian Wheezy Install Guide
 ==========================================================
 
-:Version: 0.01
+:Version: 0.02
 :Source: https://github.com/reusserl/OpenStack-Install-Guide
 :Keywords: OpenStack, Havana, Debian, Wheezy, Multi, Node, Neutron, Nova, Keystone, Glance, Horizon, Cinder, OpenVSwitch, KVM
 
@@ -40,7 +40,6 @@ Table of Contents
 ==============
 
 OpenStack Havana on Debian Wheezy Install Guide is an easy and tested way to create your own OpenStack platform. 
-
 
 Status: Beta
 
